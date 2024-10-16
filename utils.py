@@ -1,17 +1,42 @@
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import pickle
 import pandas as pd
 import numpy as np
 import streamlit as st
 import openai
 import plotly.graph_objects as go
+import json
 
-load_dotenv()
+# load_dotenv()
+
+import boto3
+from botocore.exceptions import ClientError
+
+def get_secret():
+    secret_name = "customer-churn-prediction-groq-api-key"
+    region_name = "us-east-1"
+
+    session = boto3.session.Session()
+    client = session.client(
+        service_name="secretsmanager",
+        region_name=region_name
+    )
+
+    try:
+        get_secret_value_response = client.get_secret_value(
+            SecretId=secret_name
+        )
+    except ClientError as e:
+        raise e
+
+    groq_api_key = json.loads(get_secret_value_response["SecretString"])["GROQ_API_KEY"]
+
+    return groq_api_key
 
 client = openai.OpenAI(
     base_url="https://api.groq.com/openai/v1",
-    api_key=os.environ.get("GROQ_API_KEY")
+    api_key=get_secret()
 )
 
 def load_model(filename):
@@ -98,7 +123,7 @@ def generate_email(probability, input_dict, explanation, surname):
     )
 
     raw_response = client.chat.completions.create(
-        model="llama-3.1-8b-instant",
+        model="llama-3.2-3b-preview",
         messages=[{
             "role": "user",
             "content": prompt
