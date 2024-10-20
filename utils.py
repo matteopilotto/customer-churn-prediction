@@ -19,7 +19,7 @@ def load_model(filename):
     with open(filename, "rb") as file:
         return pickle.load(file)
 
-xgboost_model = load_model>("./models/xgb_model.pkl")
+xgboost_model = load_model("./models/xgb_model.pkl")
 random_forest_model = load_model("./models/rf_model.pkl")
 knn_model = load_model("./models/knn_model.pkl")
 catboost_model = load_model("./models/catboost_model.pkl")
