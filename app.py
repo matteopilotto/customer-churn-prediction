@@ -105,12 +105,12 @@ if selected_customer_option:
         st.plotly_chart(fig_probs, use_container_width=True)
 
     explanation = explain_prediction(avg_probability, input_dict, selected_surname, churned_customers_stats, active_customers_stats)
-
     st.markdown("---")
     st.subheader("Explanation of Prediction")
     st.markdown(explanation)
 
-    email = generate_email(avg_probability, input_dict, explanation, selected_surname)
-    st.markdown("---")
-    st.subheader("Personalized Email")
-    st.markdown(email)
+    if avg_probability >= 0.4:
+        email = generate_email(avg_probability, input_dict, explanation, selected_surname)
+        st.markdown("---")
+        st.subheader("Personalized Email")
+        st.markdown(email)

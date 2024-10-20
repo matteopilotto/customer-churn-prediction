@@ -6,6 +6,7 @@ import numpy as np
 import streamlit as st
 import openai
 import plotly.graph_objects as go
+import json
 
 load_dotenv()
 
@@ -17,6 +18,14 @@ client = openai.OpenAI(
 def load_model(filename):
     with open(filename, "rb") as file:
         return pickle.load(file)
+
+xgboost_model = load_model>("./models/xgb_model.pkl")
+random_forest_model = load_model("./models/rf_model.pkl")
+knn_model = load_model("./models/knn_model.pkl")
+catboost_model = load_model("./models/catboost_model.pkl")
+
+with open("./models/scaler.pkl", "rb") as file:
+    scaler = pickle.load(file)
 
 
 def prepare_input(credit_score, location, gender, age, tenure, balance, num_products, has_credit_card, is_active_member, estimated_salary):
@@ -33,46 +42,58 @@ def prepare_input(credit_score, location, gender, age, tenure, balance, num_prod
         "Geography_France": 1 if location == "France" else 0,
         "Geography_Germany": 1 if location == "Germany" else 0,
         "Geography_Spain": 1 if location == "Spain" else 0,
-        "Gender_Male": 1 if gender == "Male" else 0,
-        "Gender_Female": 1 if gender == "Female" else 0
+        "Gender_Female": 1 if gender == "Male" else 0,
+        "Gender_Male": 1 if gender == "Female" else 0
     }
 
     input_df = pd.DataFrame([input_dict])
+    input_df = scaler.transform(input_df)
+
     return input_df, input_dict
 
 
 def make_predictions(input_df, input_dict):
-    xgboost_model = load_model("./models/xgb_model.pkl")
-    random_forest_model = load_model("./models/rf_model.pkl")
-    knn_model = load_model("./models/knn_model.pkl")
-
     probabilities = {
         "XGBoost": xgboost_model.predict_proba(input_df)[0][1],
         "Random Forest": random_forest_model.predict_proba(input_df)[0][1],
-        "K-Nearest Neighbors": knn_model.predict_proba(input_df)[0][1]
+        "K-Nearest Neighbors": knn_model.predict_proba(input_df)[0][1],
+        "CatBoost": catboost_model.predict_proba(input_df)[0][1]
     }
+
+    model_probs_list = []
 
     avg_probability = np.mean(list(probabilities.values()))
 
     st.markdown("### Model Probabilities")
+
     for model, prob in probabilities.items():
-        st.write(f"{model} {prob}")
+        model_probs_list.append(f"{model}: {prob:.2%}")
     
-    st.write(f"Average Probability: {avg_probability}")
+    model_probs_str = " | ".join(model_probs_list)
+    st.markdown(model_probs_str)
+    st.markdown(f"##### Average Probability: {avg_probability:.2%}")
 
     return avg_probability, probabilities
 
 
 def explain_prediction(probability, input_dict, surname, churned_customers_stats, active_customers_stats):
-    with open("./prompts/prompt_explain_prediction.txt") as f:
+    with open("./prompts/prompt_explain_prediction_v2.txt") as f:
         prompt_raw = f.read()
+
+    with open("./prompts/feature_importance.json") as f:
+        feature_importance = json.load(f)
+        feature_importance = json.dumps(feature_importance, indent=4)
+
+    probability = round(probability * 100, 2)
+    user_profile = json.dumps(input_dict, indent=4)
 
     prompt = prompt_raw.format(
         surname=surname,
-        probability=probability,
-        input_dict=input_dict,
-        churned_customers_stats=churned_customers_stats,
-        active_customers_stats=active_customers_stats
+        prob=probability,
+        user_profile=user_profile,
+        feature_importance=feature_importance,
+        # churned_customers_stats=churned_customers_stats,
+        # active_customers_stats=active_customers_stats
     ).strip()
 
     raw_response = client.chat.completions.create(
@@ -87,13 +108,14 @@ def explain_prediction(probability, input_dict, surname, churned_customers_stats
 
 
 def generate_email(probability, input_dict, explanation, surname):
-    with open("./prompts/prompt_generate_email.txt", "r") as f:
+    with open("./prompts/prompt_generate_email_v2.txt", "r") as f:
         prompt_raw = f.read()
+
+    prob = round(probability * 100, 2)
 
     prompt = prompt_raw.format(
         surname=surname,
-        probability=probability,
-        input_dict=input_dict,
+        user_profile=input_dict,
         explanation=explanation
     )
 

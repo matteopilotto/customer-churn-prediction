@@ -1,0 +1,76 @@
+{
+  "features": [
+    {
+      "name": "AgeGroup_Senior",
+      "importance": 0.454442
+    },
+    {
+      "name": "Gender_Male",
+      "importance": 0.116784
+    },
+    {
+      "name": "IsActiveMember",
+      "importance": 0.079248
+    },
+    {
+      "name": "AgeGroup_MiddleAge",
+      "importance": 0.056476
+    },
+    {
+      "name": "AgeGroup_Elderly",
+      "importance": 0.053826
+    },
+    {
+      "name": "NumOfProducts",
+      "importance": 0.045817
+    },
+    {
+      "name": "Gender_Female",
+      "importance": 0.044092
+    },
+    {
+      "name": "Geography_Germany",
+      "importance": 0.037684
+    },
+    {
+      "name": "Geography_France",
+      "importance": 0.030650
+    },
+    {
+      "name": "Geography_Spain",
+      "importance": 0.026470
+    },
+    {
+      "name": "Age",
+      "importance": 0.009174
+    },
+    {
+      "name": "Balance",
+      "importance": 0.008910
+    },
+    {
+      "name": "HasCrCard",
+      "importance": 0.008751
+    },
+    {
+      "name": "CLV",
+      "importance": 0.007312
+    },
+    {
+      "name": "Tenure",
+      "importance": 0.005470
+    },
+    {
+      "name": "EstimatedSalary",
+      "importance": 0.005249
+    },
+    {
+      "name": "CreditScore",
+      "importance": 0.004962
+    },
+    {
+      "name": "TenureAgeRatio",
+      "importance": 0.004682
+    }
+  ]
+}
