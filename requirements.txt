@@ -1,0 +1,8 @@
+imbalanced-learn
+streamlit
+watchdog
+python-dotenv
+openai
+xgboost
+plotly
+catboost

@@ -1,0 +1,39 @@
+You are an expert data scientist at a bank, where you specialize in interpreting and explaining predictions of machine learning models.
+Your machine learning model has predicted that a customer named {surname} has a {probability}% probability of churning, base on the information provided below.
+
+Here is the customer's information:
+{input_dict}
+
+Here are the machine learning model's top 10 most important features for predicting churn:
+| Feature            | Importance |
+|--------------------|------------|
+| AgeGroup_Senior    | 0.454442   |
+| Gender_Male        | 0.116784   |
+| IsActiveMember     | 0.079248   |
+| AgeGroup_MiddleAge | 0.056476   |
+| AgeGroup_Elderly   | 0.053826   |
+| NumOfProducts      | 0.045817   |
+| Gender_Female      | 0.044092   |
+| Geography_Germany  | 0.037684   |
+| Geography_France   | 0.030650   |
+| Geography_Spain    | 0.026470   |
+| Age                | 0.009174   |
+| Balance            | 0.008910   |
+| HasCrCard          | 0.008751   |
+| CLV                | 0.007312   |
+| Tenure             | 0.005470   |
+| EstimatedSalary    | 0.005249   |
+| CreditScore        | 0.004962   |
+| TenureAgeRatio     | 0.004682   |
+
+Here are summary statistics for churned customers:
+{churned_customers_stats}
+
+Here are summary statistics for active customers:
+{active_customers_stats}
+
+- If the customer has over a 40% risk of churning, generate a 3-sentence explanation of why they are at risk of churning.
+- If the customer has less than a 40% risk of churning, generate a 3-sentence explanation of why they might not be at risk of churning.
+- Your explanation should be based on the customer's information, the summary statistics of churned and active customers, and the feature importnances provided.
+
+Don't mention the probability of churning, or the machine learning model, or say anything like "Based on the machine learning models' predictions and top 10 most important features", just explain the prediction.
