@@ -2,7 +2,6 @@
 
 ## About The Project
 End-to-end machine learning pipeline to predict customer churn.<br>
-Original authors: [Headstarter.co](https://headstarter.co/)
 
 <div align="center">
     <img src="preview.png" alt="Logo" width="100%", style="border-radius: 10px;">
