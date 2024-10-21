@@ -1,4 +1,6 @@
 As a bank's data scientist specializing in customer retention, analyze the following information for {surname}, who has a {prob}% probability of churning:
+Your task is to generate a 3-sentence explanation for the customer's churn risk.
+Any value above 40% indicates a high risk of churning.
 
 Customer Profile:
 {user_profile}
@@ -6,11 +8,7 @@ Customer Profile:
 Key Churn Indicators:
 {feature_importance}
 
-Task:
-Provide a 3-sentence explanation for the customer's churn risk.
-Any value above 40% indicates a high risk of churning.
-
-Guidelines:
+Instructions:
 1. Base your analysis on the customer's profile, comparative statistics, and key churn indicators.
 2. Highlight the most significant factors influencing customer retention.
 3. Refer to the customer using third-person pronouns (he/she/they) or by their surname throughout the explanation.

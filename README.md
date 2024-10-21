@@ -2,25 +2,39 @@
 
 ## About The Project
 End-to-end machine learning pipeline to predict customer churn.<br>
+Live Demo: http://54.89.48.203:8501/
 
 <div align="center">
     <img src="preview.png" alt="Logo" width="100%", style="border-radius: 10px;">
 </div>
 
-## Directory structure
-```
-root_directory/
-│
-├──app.py
-├── utils.py
-├── data/
-├── models/
-├── notebooks/
-├── prompts/
-├── Dockerfile
-├── README.md
-└── requirements.txt
-```
+## Major Changes
+- Organized the code in different directories
+    ```
+    root_directory/
+    │
+    ├──app.py
+    ├── utils.py
+    ├── data/
+    ├── models/
+    ├── notebooks/
+    ├── prompts/
+    ├── README.md
+    └── requirements.txt
+    ```
+- Pre-processing
+    - Fitted `StandardScaler` only with the train data
+    - Saved fitted scaler to use during inference
+- Training
+    - Added a `CatBoostClassifier` model
+    - Set hyperparmeters for tree-based models
+- Inference 
+    - Ddded pre-processing to properly handle inference data
+- Prompt Engineering:
+    - Simplified and reorganized prompts
+    - Provided feature importance values as JSON
+- Deployment
+    - Deployed Streamlit web app with AWS
 
 ## Streamlit Web App deployment via EC2
 ### Installation
@@ -49,32 +63,33 @@ root_directory/
     GROQ_API_KEY=<your_groq_api_key>
     ```
 
-6. Update sytem and setup Python virtual environment (venv):
+6. Update sytem, setup Python, and install required libraries:
     ```shell
-    sudo apt-get update
-    sudo apt install python3-pip
-    sudo apt install python3-venv
-    python3 -m venv myvenv
+    chmod +x setup.sh
+    ./setup.sh
+    ```
+
+7. Activate virtual environment:
+    ```
     source myvenv/bin/activate
-    pip install -r requirements.txt
     ```
 
-7. Create a new tmux session:
+8. Create a new tmux session:
     ```
-    tmux new -s <your-tmux-session-name>
+    tmux new -s streamlit_session
     ```
 
-8. Launch streamlit app:
+9. Launch streamlit app:
     ```
     streamlit run app.py --server.address 0.0.0.0 --server.port 8501
     ```
 
-9. Detach from tmux session:
+10. Detach from tmux session:
     ```
     CTRL+B + D
     ```
 
-10. Access the Stramlit app via the EC2 public IP address:
+11. Access the Stramlit app via the EC2 public IP address:
     ```
     http://<your-ec2-public-ip>:8501
     ```
