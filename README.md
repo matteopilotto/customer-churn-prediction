@@ -29,7 +29,7 @@ Live Demo: http://54.89.48.203:8501/
     - Added a `CatBoostClassifier` model
     - Set hyperparmeters for tree-based models
 - Inference 
-    - Ddded pre-processing to properly handle inference data
+    - Added pre-processing to properly handle inference data
 - Prompt Engineering:
     - Simplified and reorganized prompts
     - Provided feature importance values as JSON
