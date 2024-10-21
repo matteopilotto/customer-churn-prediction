@@ -56,22 +56,27 @@ root_directory/
     ./setup.sh
     ```
 
-7. Create a new tmux session:
+7. Activate virtual environment:
+    ```
+    source myvenv/bin/activate
+    ```
+
+8. Create a new tmux session:
     ```
     tmux new -s streamlit_session
     ```
 
-8. Launch streamlit app:
+9. Launch streamlit app:
     ```
     streamlit run app.py --server.address 0.0.0.0 --server.port 8501
     ```
 
-9. Detach from tmux session:
+10. Detach from tmux session:
     ```
     CTRL+B + D
     ```
 
-10. Access the Stramlit app via the EC2 public IP address:
+11. Access the Stramlit app via the EC2 public IP address:
     ```
     http://<your-ec2-public-ip>:8501
     ```
