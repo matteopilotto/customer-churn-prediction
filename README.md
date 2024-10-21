@@ -50,14 +50,10 @@ root_directory/
     GROQ_API_KEY=<your_groq_api_key>
     ```
 
-6. Update sytem and setup Python virtual environment (venv):
+6. Update sytem, setup Python, and install required libraries:
     ```shell
-    sudo apt-get update
-    sudo apt install python3-pip
-    sudo apt install python3-venv
-    python3 -m venv myvenv
-    source myvenv/bin/activate
-    pip install -r requirements.txt
+    chmod +x setup.sh
+    ./setup.sh
     ```
 
 7. Create a new tmux session:
