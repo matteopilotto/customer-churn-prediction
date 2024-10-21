@@ -2,6 +2,7 @@
 
 ## About The Project
 End-to-end machine learning pipeline to predict customer churn.<br>
+Live Demo: http://54.89.48.203:8501/
 
 <div align="center">
     <img src="preview.png" alt="Logo" width="100%", style="border-radius: 10px;">
@@ -61,7 +62,7 @@ root_directory/
 
 7. Create a new tmux session:
     ```
-    tmux new -s <your-tmux-session-name>
+    tmux new -s streamlit_session
     ```
 
 8. Launch streamlit app:
