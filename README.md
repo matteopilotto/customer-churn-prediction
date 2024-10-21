@@ -8,20 +8,33 @@ Live Demo: http://54.89.48.203:8501/
     <img src="preview.png" alt="Logo" width="100%", style="border-radius: 10px;">
 </div>
 
-## Directory structure
-```
-root_directory/
-│
-├──app.py
-├── utils.py
-├── data/
-├── models/
-├── notebooks/
-├── prompts/
-├── Dockerfile
-├── README.md
-└── requirements.txt
-```
+## Major Changes
+- Organized the code in different directories
+    ```
+    root_directory/
+    │
+    ├──app.py
+    ├── utils.py
+    ├── data/
+    ├── models/
+    ├── notebooks/
+    ├── prompts/
+    ├── README.md
+    └── requirements.txt
+    ```
+- Pre-processing
+    - Fitted `StandardScaler` only with the train data
+    - Saved fitted scaler to use during inference
+- Training
+    - Added a `CatBoostClassifier` model
+    - Set hyperparmeters for tree-based models
+- Inference 
+    - Ddded pre-processing to properly handle inference data
+- Prompt Engineering:
+    - Simplified and reorganized prompts
+    - Provided feature importance values as JSON
+- Deployment
+    - Deployed Streamlit web app with AWS
 
 ## Streamlit Web App deployment via EC2
 ### Installation
