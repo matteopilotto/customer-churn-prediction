@@ -2,7 +2,7 @@
 
 ## About The Project
 End-to-end machine learning pipeline to predict customer churn.<br>
-Live Demo: http://54.89.48.203:8501/
+Live Demo: <a href="http://54.89.48.203:8501" target="_blank">http://54.89.48.203:8501</a>
 
 <div align="center">
     <img src="preview.png" alt="Logo" width="100%", style="border-radius: 10px;">
@@ -63,33 +63,25 @@ Live Demo: http://54.89.48.203:8501/
     GROQ_API_KEY=<your_groq_api_key>
     ```
 
-6. Update sytem, setup Python, and install required libraries:
+6. Update sytem, set up Python environment, and install required libraries:
     ```shell
     chmod +x setup.sh
-    ./setup.sh
+    source setup.sh
     ```
 
-7. Activate virtual environment:
-    ```
-    source myvenv/bin/activate
-    ```
-
-8. Create a new tmux session:
+7. Create a new tmux session:
     ```
     tmux new -s streamlit_session
     ```
 
-9. Launch streamlit app:
+8. Launch streamlit app:
     ```
     streamlit run app.py --server.address 0.0.0.0 --server.port 8501
     ```
 
-10. Detach from tmux session:
-    ```
-    CTRL+B + D
-    ```
+9. To detach from the tmux session press `CTRL+B + D`
 
-11. Access the Stramlit app via the EC2 public IP address:
+10. Access the Stramlit app via the EC2 public IP address:
     ```
     http://<your-ec2-public-ip>:8501
     ```
@@ -111,5 +103,6 @@ Live Demo: http://54.89.48.203:8501/
     ```
 
 ## Contributing
+### Top contributors:
 - [Headstarter.co](https://headstarter.co/)
 - Matteo Pilotto
