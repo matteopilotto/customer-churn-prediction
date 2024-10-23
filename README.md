@@ -2,7 +2,7 @@
 
 ## About The Project
 End-to-end machine learning pipeline to predict customer churn.<br>
-Live Demo: http://54.89.48.203:8501/
+Live Demo: <a href="http://54.89.48.203:8501" target="_blank">http://54.89.48.203:8501</a>
 
 <div align="center">
     <img src="preview.png" alt="Logo" width="100%", style="border-radius: 10px;">
